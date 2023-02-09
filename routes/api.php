@@ -34,7 +34,7 @@ function (Request $request) {
 //Usuarios
 Route::post('/register', 'App\Http\Controllers\Api\V1\AuthController@register');
 Route::post('/login', 'App\Http\Controllers\Api\V1\AuthController@login');
-
+Route::post('/insertarTipoUsuarios', 'App\Http\Controllers\Api\V1\UsuarioController@insertarTipoUsuarios');
 
 
 

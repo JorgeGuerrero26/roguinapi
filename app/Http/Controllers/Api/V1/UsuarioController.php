@@ -239,5 +239,21 @@ class UsuarioController extends Controller
             return response()->json(['data' => $th->getMessage(),'status' => 'false'], 500);
         }
     }
+
+    public function insertarTipoUsuario(Request $request){
+        try {
+            $request->validate([
+                'descripcion' => 'required|unique:tipo_usuarios',
+            ]);
+            $tipoUsuario = new Tipo_usuario();
+            $tipoUsuario->descripcion = $request->descripcion;
+            $tipoUsuario->save();
+            return response()->json(['data' => 'Tipo de usuario insertado con exito','status' => 'true'],200);         
+        } catch (\Exception $e) {
+            return response()->json(['data' => $e->getMessage(),'status' => 'false'], 500);
+        } catch (\Throwable $th) {
+            return response()->json(['data' => $th->getMessage(),'status' => 'false'], 500);
+        }
+    }
        
 }
