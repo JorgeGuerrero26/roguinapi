@@ -240,7 +240,7 @@ class UsuarioController extends Controller
         }
     }
 
-    public function insertarTipoUsuario(Request $request){
+    public function insertarTipoUsuarios(Request $request){
         try {
             $request->validate([
                 'descripcion' => 'required|unique:tipo_usuarios',
