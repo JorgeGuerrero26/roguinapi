@@ -18,7 +18,7 @@ class UsuarioController extends Controller
             
 
 
-            $usuarios = DB::select('select id,nombre,email,clave,tipo_usuario_id as tipo_usuario,tipo_usuario_id,estado,created_at,updated_at from usuarios where estado = 1');
+            $usuarios = DB::select('select id,nombre,email,clave,tipo_usuario_id as tipo_usuario,tipo_usuario_id,estado,created_at,updated_at from usuarios where estado = true');
             //Agregar la descripcion del tipo de usuario_id
             foreach ($usuarios as $usuario) {
                 $usuario->tipo_usuario = Tipo_usuario::find($usuario->tipo_usuario)->descripcion;
@@ -44,7 +44,7 @@ class UsuarioController extends Controller
             
 
 
-            $usuarios = DB::select('select id,nombre,email,clave,tipo_usuario_id as tipo_usuario,tipo_usuario_id,estado,created_at,updated_at from usuarios where estado = 0');
+            $usuarios = DB::select('select id,nombre,email,clave,tipo_usuario_id as tipo_usuario,tipo_usuario_id,estado,created_at,updated_at from usuarios where estado = false');
             //Agregar la descripcion del tipo de usuario_id
             foreach ($usuarios as $usuario) {
                 $usuario->tipo_usuario = Tipo_usuario::find($usuario->tipo_usuario)->descripcion;
@@ -95,7 +95,7 @@ class UsuarioController extends Controller
             //Si envio por el nombre buscar los nombres parecidos, si envio por email buscar los emails parecidos y si no envio nada traer todos los usuarios
             if ($request->nombre) {
                 //Buscar nombres parecidos
-                $usuarios = DB::select("select id,nombre,email,clave,tipo_usuario_id as tipo_usuario,tipo_usuario_id,estado,created_at,updated_at from usuarios where estado = 1 and nombre like '%".$request->nombre."%'");           
+                $usuarios = DB::select("select id,nombre,email,clave,tipo_usuario_id as tipo_usuario,tipo_usuario_id,estado,created_at,updated_at from usuarios where estado = true and nombre like '%".$request->nombre."%'");           
                 foreach ($usuarios as $usuario) {
                     $usuario->tipo_usuario = Tipo_usuario::find($usuario->tipo_usuario)->descripcion;
                 }                 
@@ -106,7 +106,7 @@ class UsuarioController extends Controller
                 }    
             } elseif ($request->email) {
                 //Buscar emails parecidos
-                $usuarios = DB::select("select id,nombre,email,clave,tipo_usuario_id as tipo_usuario,tipo_usuario_id,estado,created_at,updated_at from usuarios where estado = 1 and email like '%".$request->email."%'");           
+                $usuarios = DB::select("select id,nombre,email,clave,tipo_usuario_id as tipo_usuario,tipo_usuario_id,estado,created_at,updated_at from usuarios where estado = true and email like '%".$request->email."%'");           
                 foreach ($usuarios as $usuario) {
                     $usuario->tipo_usuario = Tipo_usuario::find($usuario->tipo_usuario)->descripcion;
                 }                 
@@ -117,7 +117,7 @@ class UsuarioController extends Controller
                     return response()->json(['data' => 'No se encontraron usuarios','status' => 'false'],404);
                 }
             } else {
-                $usuarios = DB::select('select id,nombre,email,clave,tipo_usuario_id as tipo_usuario,tipo_usuario_id,estado,created_at,updated_at from usuarios where estado = 1');
+                $usuarios = DB::select('select id,nombre,email,clave,tipo_usuario_id as tipo_usuario,tipo_usuario_id,estado,created_at,updated_at from usuarios where estado = true');
                 foreach ($usuarios as $usuario) {
                     $usuario->tipo_usuario = Tipo_usuario::find($usuario->tipo_usuario)->descripcion;
                 }        

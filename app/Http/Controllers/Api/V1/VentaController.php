@@ -25,7 +25,7 @@ class VentaController extends Controller
     {
         try {
             //Traer las ultimas 100 ventas con todos los datos de las ventas ademas hacer inner join con cliente para saber el nombre del cliente, hacer inner join con usuario para saber el nombre del usuario y hacer inner join con entrega para saber la zona_entrega
-            $ventas = DB::select('SELECT TOP 100 V.*, C.nombre as cliente, U.nombre as usuario, E.zona_entrega FROM ventas V INNER JOIN clientes C ON V.cliente_id = C.id INNER JOIN usuarios U ON V.usuario_id = U.id INNER JOIN entregas E ON V.entrega_id = E.id ORDER BY V.id DESC');
+            $ventas = DB::select('SELECT V.*, C.nombre as cliente, U.nombre as usuario, E.zona_entrega FROM ventas V INNER JOIN clientes C ON V.cliente_id = C.id INNER JOIN usuarios U ON V.usuario_id = U.id INNER JOIN entregas E ON V.entrega_id = E.id ORDER BY V.id DESC limit 100');
             return response()->json(['data' => $ventas, 'status' => 'true'], 200);
         } catch (\Exception $e) {
             return response()->json(['data' => $e->getMessage(), 'status' => 'false'], 500);
@@ -203,7 +203,7 @@ class VentaController extends Controller
     //Modularizando busqueda por fechas
     public function buscarFechas($fecha_inicio, $fecha_fin)
     {
-        $ventas = DB::select('SELECT TOP 100 V.*, C.nombre as cliente, U.nombre as usuario, E.zona_entrega FROM ventas V INNER JOIN clientes C ON V.cliente_id = C.id INNER JOIN usuarios U ON V.usuario_id = U.id INNER JOIN entregas E ON V.entrega_id = E.id WHERE V.fecha BETWEEN ? AND ? ORDER BY V.id DESC', [$fecha_inicio, $fecha_fin]);
+        $ventas = DB::select('SELECT V.*, C.nombre as cliente, U.nombre as usuario, E.zona_entrega FROM ventas V INNER JOIN clientes C ON V.cliente_id = C.id INNER JOIN usuarios U ON V.usuario_id = U.id INNER JOIN entregas E ON V.entrega_id = E.id WHERE V.fecha BETWEEN ? AND ? ORDER BY V.id DESC limit 100', [$fecha_inicio, $fecha_fin]);
         return response()->json(['data' => $ventas, 'status' => 'true'], 200);
     }
 
@@ -311,7 +311,7 @@ class VentaController extends Controller
                 'cliente_id' => 'nullable|integer',
             ]);
             if ($request->has('cliente_id') && $request->get('cliente_id') > 0) {
-                $ventas = DB::select('SELECT TOP 100 V.*, C.nombre as cliente, U.nombre as usuario, E.zona_entrega FROM ventas V INNER JOIN clientes C ON V.cliente_id = C.id INNER JOIN usuarios U ON V.usuario_id = U.id INNER JOIN entregas E ON V.entrega_id = E.id WHERE V.cliente_id = ?', [$request->cliente_id]);
+                $ventas = DB::select('SELECT V.*, C.nombre as cliente, U.nombre as usuario, E.zona_entrega FROM ventas V INNER JOIN clientes C ON V.cliente_id = C.id INNER JOIN usuarios U ON V.usuario_id = U.id INNER JOIN entregas E ON V.entrega_id = E.id WHERE V.cliente_id = ? limit 100', [$request->cliente_id]);
                 return response()->json(['data' => $ventas, 'status' => 'true'], 200);
             } else {
                 return $this->listarVentas();
