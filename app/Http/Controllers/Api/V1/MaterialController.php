@@ -150,7 +150,7 @@ class MaterialController extends Controller
                 'id' => 'required',
             ]);
             $material = Material::find($request->id);
-            $material->estado = 0;
+            $material->estado = false;
             $material->save();
             
             
@@ -194,7 +194,7 @@ class MaterialController extends Controller
                 'id' => 'required',
             ]);
             $material = Material::find($request->id);
-            $material->estado = 1;
+            $material->estado = true;
             $material->save();
             return response()->json(['data' => 'Material dado de alta con exito', 'status' => 'true'], 200);
         } catch (\Exception $e) {

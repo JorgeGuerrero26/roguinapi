@@ -34,7 +34,7 @@ class EntregaController extends Controller
 
     public function listarEntregas()
     {
-        $entregas = BD::SELECT('SELECT e.*,c.nombre as cliente FROM entregas e inner join clientes c on c.id = e.cliente_id WHERE e.estado = 1 order by 1 desc');     
+        $entregas = BD::SELECT('SELECT e.*,c.nombre as cliente FROM entregas e inner join clientes c on c.id = e.cliente_id WHERE e.estado = true order by 1 desc');     
         return response()->json(['data' => $entregas, 'status' => 'true'], 200);
     }
 
@@ -42,7 +42,7 @@ class EntregaController extends Controller
 
     public function listarEntregasConEstado0()
     {
-        $entregas = BD::SELECT('SELECT e.*,c.nombre as cliente FROM entregas e inner join clientes c on c.id = e.cliente_id WHERE e.estado = 0 order by 1 desc');     
+        $entregas = BD::SELECT('SELECT e.*,c.nombre as cliente FROM entregas e inner join clientes c on c.id = e.cliente_id WHERE e.estado = false order by 1 desc');     
         return response()->json(['data' => $entregas, 'status' => 'true'], 200);
     }
 
