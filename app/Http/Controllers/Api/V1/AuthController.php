@@ -63,6 +63,13 @@ class AuthController extends Controller
 
         $usuario = Usuario::where('email', $request->email)->firstOrFail();
 
+        //Verificar el estado del usuario
+        if($usuario->estado == false){
+            return response()->json([
+                'message' => 'Usuario inactivo'
+            ], 401);
+        }
+
         $token = $usuario->createToken('auth_token')->plainTextToken;
 
         return response()
