@@ -50,7 +50,7 @@ class ProveedorController extends Controller
         try {
             //validar que el ruc sea unicamente de 11 caracteres numericos
             $request->validate([
-                'ruc' => 'required|unique:proveedores|digits:11|integer',
+                'ruc' => 'required|unique:proveedores|digits:11',
                 //Validar que envie al menos un caracter
                 'nombre' => 'required',
             ]);
@@ -121,7 +121,7 @@ class ProveedorController extends Controller
             //Validar que el ruc sea numerico y que tenga 11 caracteres, ademas validar que el ruc sea unico sin tomar en cuenta el actuall
             $request->validate([
                 'id' => 'required|integer',
-                'ruc' => 'required|unique:proveedores,ruc,' . $request->id . '|digits:11|integer',
+                'ruc' => 'required|unique:proveedores,ruc,' . $request->id . '|digits:11',
                 'nombre' => 'required',
                 'estado' => 'required',
             ]);
