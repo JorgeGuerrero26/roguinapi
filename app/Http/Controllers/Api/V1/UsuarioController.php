@@ -137,15 +137,20 @@ class UsuarioController extends Controller
                 'tipo_usuario_id' => 'required',
                 'nombre' => 'required|unique:usuarios,nombre,' . $request->id,
                 'email' => 'required|email|unique:usuarios,email,' . $request->id,
-                'estado' => 'required|boolean',
-                'clave' => 'required',
+                'estado' => 'required|boolean',             
             ]);
             $usuario = Usuario::find($request->id);
             $usuario->tipo_usuario_id = $request->tipo_usuario_id;
             $usuario->nombre = $request->nombre;
             $usuario->email = $request->email;
-            $usuario->clave = Hash::make($request->clave);
-            $usuario->estado = $request->estado;
+
+            //Si la clave esta vacia la dejo como esta, si no la actualizo
+            if ($request->clave != '') {
+                $usuario->clave = Hash::make($request->clave);
+            } else {
+                $usuario->clave = $usuario->clave;
+            }                   
+            $usuario->estado = $request->estado;            
             $usuario->save();
 
 
