@@ -74,7 +74,15 @@ class UsuarioController extends Controller
                 'email' => 'required|email|unique:usuarios',
                 'clave' => 'required',
             ]);
-            $usuario = Usuario::create($request->all());
+
+            $usuario = new Usuario();
+            $usuario->tipo_usuario_id = $request->tipo_usuario_id;
+            $usuario->nombre = $request->nombre;
+            $usuario->email = $request->email;
+            $usuario->clave = Hash::make($request->clave);
+            $usuario->estado = true;
+            $usuario->save();
+            
             return response()->json(['data' =>'Usuario registrado con exito','status' => 'true'],200);            
         } catch (\Exception $e) {
             return response()->json(['data' => $e->getMessage(),'status' => 'false'], 500);
