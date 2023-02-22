@@ -44,7 +44,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::post('/logout', 'App\Http\Controllers\Api\V1\AuthController@logout');
 
-    //Emtregas
+    //Emtregasf
 
     Route::get('/listarEntregas', 'App\Http\Controllers\Api\V1\EntregaController@listarEntregas');
     Route::post('/insertarEntregas', 'App\Http\Controllers\Api\V1\EntregaController@insertarEntregas');
@@ -82,7 +82,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     //Usuarios (Esta por ver si usaremos estas rutas o las que nos proporciona laravel)
     Route::post('/buscarUsuarios', 'App\Http\Controllers\Api\V1\UsuarioController@buscarUsuarios');
     Route::get('/listarUsuarios', 'App\Http\Controllers\Api\V1\UsuarioController@listarUsuarios');
-    Route::post('/insertarUsuarios', 'App\Http\Controllers\Api\V1\UsuarioController@insertarUsuarios');
     Route::post('/actualizarUsuarios', 'App\Http\Controllers\Api\V1\UsuarioController@actualizarUsuarios');
     Route::post('/eliminarUsuarios', 'App\Http\Controllers\Api\V1\UsuarioController@eliminarUsuarios');
     Route::post('/loginUsuario', 'App\Http\Controllers\Api\V1\UsuarioController@loginUsuario');
