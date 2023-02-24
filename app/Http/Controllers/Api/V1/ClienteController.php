@@ -15,8 +15,8 @@ class ClienteController extends Controller
     public function listarClientes()
     {
         try {
-            //Listar todos los clientes que su estado sea 1
-            $clientes = Cliente::where('estado', 1)->get();
+            //Listar todos los clientes que su estado sea 1 y ordenados por id en forma descendente
+            $clientes = Cliente::where('estado', 1)->orderBy('id', 'desc')->get();            
             return response()->json(['data' => $clientes, 'status' => 'true'], 200);
         } catch (\Throwable $th) {
             return response()->json([
