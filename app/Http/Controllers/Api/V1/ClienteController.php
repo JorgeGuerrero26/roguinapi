@@ -101,6 +101,7 @@ class ClienteController extends Controller
                 'documento' => 'required|integer',
                 'entregas' => 'required',
                 'forma_pago' => 'required',
+                'numero' => 'required',
             ]);
 
             //validar que el documento ingresado sea un numero de 8 o 11 digitos
@@ -116,6 +117,7 @@ class ClienteController extends Controller
                     $cliente->nombre = $request->nombre;
                     $cliente->documento = $request->documento;
                     $cliente->forma_pago = $request->forma_pago;
+                    $cliente->numero = $request->numero;
 
 
                     //Hacer commit
@@ -196,6 +198,7 @@ class ClienteController extends Controller
                 'estado' => 'required',
                 'id' => 'required',
                 'forma_pago' => 'required',
+                'numero' => 'required',
             ]);
 
             //validar que el documento ingresado sea un numero de 8 o 11 digitos
@@ -213,6 +216,7 @@ class ClienteController extends Controller
                 $cliente->estado = $request->estado;
                 $cliente->saldo_botellon = $request->saldo_botellon;
                 $cliente->forma_pago = $request->forma_pago;
+                $cliente->numero = $request->numero;
                 $cliente->save();
 /*                 //Obtener el json de entregas del cliente
                 $entregas = $request->entregas;
