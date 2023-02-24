@@ -101,7 +101,6 @@ class ClienteController extends Controller
                 'documento' => 'required|integer',
                 'entregas' => 'required',
                 'forma_pago' => 'required',
-                'numero' => 'required',
             ]);
 
             //validar que el documento ingresado sea un numero de 8 o 11 digitos
@@ -197,8 +196,7 @@ class ClienteController extends Controller
                 'saldo_botellon' => 'required|integer',
                 'estado' => 'required',
                 'id' => 'required',
-                'forma_pago' => 'required',
-                'numero' => 'required',
+                'forma_pago' => 'required',                                                   
             ]);
 
             //validar que el documento ingresado sea un numero de 8 o 11 digitos
